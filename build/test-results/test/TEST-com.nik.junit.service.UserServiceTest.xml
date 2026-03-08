@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.nik.junit.service.UserServiceTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2026-03-06T18:02:16.116Z" hostname="DESKTOP-AL14MBR" time="0.027">
+  <properties/>
+  <testcase name="usersEmptyIfNoUsersAdded()" classname="com.nik.junit.service.UserServiceTest" time="0.023"/>
+  <testcase name="usersSizeIfUserAdded()" classname="com.nik.junit.service.UserServiceTest" time="0.002"/>
+  <system-out><![CDATA[Before all: 
+Before each: com.nik.junit.service.UserServiceTest@126253fd
+Test 1: com.nik.junit.service.UserServiceTest@126253fd
+After each: com.nik.junit.service.UserServiceTest@126253fd
+Before each: com.nik.junit.service.UserServiceTest@311bf055
+Test 2: com.nik.junit.service.UserServiceTest@311bf055
+After each: com.nik.junit.service.UserServiceTest@311bf055
+After all: 
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
