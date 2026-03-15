@@ -11,6 +11,7 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
+@Tag("user")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class UserServiceTest {
 
@@ -29,40 +30,6 @@ class UserServiceTest {
         System.out.println("Before each: " + this);
     }
 
-    @Test
-    void loginSuccessIfUserExists(){
-        userService.add(IVAN);
-        Optional<User> masybeUser = userService.login(IVAN.getUserName(), IVAN.getPassword());
-
-        assertThat(masybeUser).isPresent();
-//        assertTrue(masybeUser.isPresent());
-        masybeUser.ifPresent(user -> assertThat(user).isEqualTo(IVAN));
-    }
-
-    @Test
-    void throwExceptionIfUsernameOrPasswordIsNull(){
-        assertAll(
-                () -> assertThrows(IllegalArgumentException.class, () -> userService.login(null, "dummy")),
-                () -> assertThrows(IllegalArgumentException.class, () -> userService.login("dummy", null))
-
-        );
-    }
-
-    @Test
-    void loginFailIfPasswordIsNotCorrect(){
-        userService.add(IVAN);
-        var maybeUser = userService.login(IVAN.getUserName(), "dummy");
-
-        assertTrue(maybeUser.isEmpty());
-    }
-
-    @Test
-    void loginFailIfUserDoesNotExists(){
-        userService.add(IVAN);
-        var maybeUser = userService.login("dummy", IVAN.getPassword());
-
-        assertTrue(maybeUser.isEmpty());
-    }
 
     @Test
     void usersEmptyIfNoUsersAdded() {
@@ -102,5 +69,46 @@ class UserServiceTest {
     @AfterAll
     void closeConnectionPool() {
         System.out.println("After all: ");
+    }
+
+    @Nested
+    @DisplayName("test user login functionality")
+    @Tag("login")
+    class LoginTest{
+
+        @Test
+        void loginSuccessIfUserExists(){
+            userService.add(IVAN);
+            Optional<User> masybeUser = userService.login(IVAN.getUserName(), IVAN.getPassword());
+
+            assertThat(masybeUser).isPresent();
+//        assertTrue(masybeUser.isPresent());
+            masybeUser.ifPresent(user -> assertThat(user).isEqualTo(IVAN));
+        }
+
+        @Test
+        void throwExceptionIfUsernameOrPasswordIsNull(){
+            assertAll(
+                    () -> assertThrows(IllegalArgumentException.class, () -> userService.login(null, "dummy")),
+                    () -> assertThrows(IllegalArgumentException.class, () -> userService.login("dummy", null))
+
+            );
+        }
+
+        @Test
+        void loginFailIfPasswordIsNotCorrect(){
+            userService.add(IVAN);
+            var maybeUser = userService.login(IVAN.getUserName(), "dummy");
+
+            assertTrue(maybeUser.isEmpty());
+        }
+
+        @Test
+        void loginFailIfUserDoesNotExists(){
+            userService.add(IVAN);
+            var maybeUser = userService.login("dummy", IVAN.getPassword());
+
+            assertTrue(maybeUser.isEmpty());
+        }
     }
 }
