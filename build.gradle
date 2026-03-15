@@ -15,6 +15,7 @@ dependencies {
     testImplementation("org.junit.platform:junit-platform-launcher:6.0.2")
     implementation("org.projectlombok:lombok:1.18.42")
     annotationProcessor("org.projectlombok:lombok:1.18.42")
+    testImplementation("org.assertj:assertj-core:3.27.7")
 }
 
 test {

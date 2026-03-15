@@ -1,10 +1,14 @@
 package com.nik.junit.service;
 
 import com.nik.junit.dto.User;
+import org.assertj.core.api.Assertions;
+import org.assertj.core.api.MatcherAssert;
 import org.junit.jupiter.api.*;
 
+import java.util.Map;
 import java.util.Optional;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -30,8 +34,18 @@ class UserServiceTest {
         userService.add(IVAN);
         Optional<User> masybeUser = userService.login(IVAN.getUserName(), IVAN.getPassword());
 
-        assertTrue(masybeUser.isPresent());
-        masybeUser.ifPresent(user -> assertEquals(IVAN, user));
+        assertThat(masybeUser).isPresent();
+//        assertTrue(masybeUser.isPresent());
+        masybeUser.ifPresent(user -> assertThat(user).isEqualTo(IVAN));
+    }
+
+    @Test
+    void throwExceptionIfUsernameOrPasswordIsNull(){
+        assertAll(
+                () -> assertThrows(IllegalArgumentException.class, () -> userService.login(null, "dummy")),
+                () -> assertThrows(IllegalArgumentException.class, () -> userService.login("dummy", null))
+
+        );
     }
 
     @Test
@@ -55,7 +69,7 @@ class UserServiceTest {
         System.out.println("Test 1: " + this);
 
         var users = userService.getAll();
-        assertTrue(users.isEmpty(), () -> "User list should be empty");
+        assertThat(users).isEmpty();
     }
 
     @Test
@@ -66,7 +80,18 @@ class UserServiceTest {
         userService.add(PETR);
 
         var users = userService.getAll();
-        assertEquals(2, users.size());
+        assertThat(users).hasSize(2);
+    }
+
+    @Test
+    void usersConvertedToMapById(){
+        userService.add(IVAN, PETR);
+        Map<Integer, User> users = userService.getAllConvertedById();
+
+        assertAll(
+                () -> assertThat(users).containsKeys(IVAN.getId(), PETR.getId()),
+                () -> assertThat(users).containsValues(IVAN, PETR)
+        );
     }
 
     @AfterEach
