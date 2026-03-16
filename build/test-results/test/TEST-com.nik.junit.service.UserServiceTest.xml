@@ -1,18 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.nik.junit.service.UserServiceTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-03-15T12:27:32.877Z" hostname="desktop" time="0.024">
+<testsuite name="com.nik.junit.service.UserServiceTest" tests="4" skipped="0" failures="1" errors="0" timestamp="2026-03-16T17:34:25.833Z" hostname="desktop" time="0.533">
   <properties/>
-  <testcase name="loginSuccessIfUserExists()" classname="com.nik.junit.service.UserServiceTest" time="0.02"/>
-  <testcase name="usersEmptyIfNoUsersAdded()" classname="com.nik.junit.service.UserServiceTest" time="0.001"/>
-  <testcase name="usersSizeIfUserAdded()" classname="com.nik.junit.service.UserServiceTest" time="0.001"/>
-  <system-out><![CDATA[Before all: com.nik.junit.service.UserServiceTest@4b20ca2b
-Before each: com.nik.junit.service.UserServiceTest@4b20ca2b
-After each: com.nik.junit.service.UserServiceTest@4b20ca2b
-Before each: com.nik.junit.service.UserServiceTest@4b20ca2b
-Test 1: com.nik.junit.service.UserServiceTest@4b20ca2b
-After each: com.nik.junit.service.UserServiceTest@4b20ca2b
-Before each: com.nik.junit.service.UserServiceTest@4b20ca2b
-Test 2: com.nik.junit.service.UserServiceTest@4b20ca2b
-After each: com.nik.junit.service.UserServiceTest@4b20ca2b
+  <testcase name="usersConvertedToMapById()" classname="com.nik.junit.service.UserServiceTest" time="0.505"/>
+  <testcase name="usersEmptyIfNoUsersAdded()" classname="com.nik.junit.service.UserServiceTest" time="0.005"/>
+  <testcase name="shouldDeleteExistedUser()" classname="com.nik.junit.service.UserServiceTest" time="0.017">
+    <failure message="org.opentest4j.AssertionFailedError: &#10;Expecting value to be true but was false" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: 
+Expecting value to be true but was false
+	at app//com.nik.junit.service.UserServiceTest.shouldDeleteExistedUser(UserServiceTest.java:52)
+</failure>
+  </testcase>
+  <testcase name="usersSizeIfUserAdded()" classname="com.nik.junit.service.UserServiceTest" time="0.002"/>
+  <system-out><![CDATA[post processing extension
+before all callback
+Before all: com.nik.junit.service.UserServiceTest@6f2cb653
+Before each: com.nik.junit.service.UserServiceTest@6f2cb653
+after test execution
+After each: com.nik.junit.service.UserServiceTest@6f2cb653
+Before each: com.nik.junit.service.UserServiceTest@6f2cb653
+Test 1: com.nik.junit.service.UserServiceTest@6f2cb653
+after test execution
+After each: com.nik.junit.service.UserServiceTest@6f2cb653
+Before each: com.nik.junit.service.UserServiceTest@6f2cb653
+after test execution
+After each: com.nik.junit.service.UserServiceTest@6f2cb653
+Before each: com.nik.junit.service.UserServiceTest@6f2cb653
+Test 2: com.nik.junit.service.UserServiceTest@6f2cb653
+after test execution
+After each: com.nik.junit.service.UserServiceTest@6f2cb653
 After all: 
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
