@@ -5,6 +5,7 @@ import org.assertj.core.api.Assertions;
 import org.assertj.core.api.MatcherAssert;
 import org.junit.jupiter.api.*;
 
+import java.time.Duration;
 import java.util.Map;
 import java.util.Optional;
 
@@ -13,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @Tag("user")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@TestMethodOrder(MethodOrderer.Random.class)
 class UserServiceTest {
 
     private static final User IVAN = new User(1, "Ivan", "123");
@@ -77,12 +79,16 @@ class UserServiceTest {
     class LoginTest{
 
         @Test
+        void checkLoginFunctionalityPerformance() {
+            assertTimeout(Duration.ofMillis(200L), () -> userService.login("dummy", IVAN.getPassword()));
+        }
+
+        @Test
         void loginSuccessIfUserExists(){
             userService.add(IVAN);
             Optional<User> masybeUser = userService.login(IVAN.getUserName(), IVAN.getPassword());
 
             assertThat(masybeUser).isPresent();
-//        assertTrue(masybeUser.isPresent());
             masybeUser.ifPresent(user -> assertThat(user).isEqualTo(IVAN));
         }
 
